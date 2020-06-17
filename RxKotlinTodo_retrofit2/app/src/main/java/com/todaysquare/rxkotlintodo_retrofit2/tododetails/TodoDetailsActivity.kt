@@ -18,8 +18,8 @@ import com.todaysquare.rxkotlintodo_retrofit2.utils.Constants.INTENT_TODOITEM
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-
 import kotlinx.android.synthetic.main.activity_todo_details.*
+
 import kotlinx.android.synthetic.main.content_todo_details.*
 
 import org.jetbrains.anko.toast
@@ -31,6 +31,7 @@ class TodoDetailsActivity : BaseActivity() {
     var isEditing = false
 
     override fun onCreateBaseActivity(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_todo_details)
 
         detail_toolbar.title = "View and edit todo"
