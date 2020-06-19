@@ -97,7 +97,7 @@ captures/
 .externalNativeBuild
 
 # Google Services (e.g. APIs or Firebase)
-# google-services.json
+google-services.json
 
 # Freeline
 freeline.py
@@ -122,3 +122,4 @@ lint/tmp/
 # lint/reports/
 
 strings.xml
+app/libs/
