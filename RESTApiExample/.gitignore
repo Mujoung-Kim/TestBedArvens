@@ -121,3 +121,4 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
+strings.xml

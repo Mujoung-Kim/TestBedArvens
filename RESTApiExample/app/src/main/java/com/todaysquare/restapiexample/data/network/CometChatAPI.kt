@@ -2,13 +2,13 @@ package com.todaysquare.restapiexample.data.network
 
 import android.app.Activity.RESULT_OK
 import android.content.Context
-import android.provider.ContactsContract.Contacts.Data
 import android.util.Log
 
 import com.todaysquare.restapiexample.R
 import com.todaysquare.restapiexample.ui.activities.AddFriendDialogActivity
 import com.todaysquare.restapiexample.utils.Constants.Url.Companion.BASE_URL
 import com.todaysquare.restapiexample.utils.Constants.Url.Companion.version
+import com.todaysquare.restapiexample.utils.Data
 import com.todaysquare.restapiexample.utils.showToast
 
 import retrofit2.Call
@@ -16,10 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 class CometChatAPI(private val context: Context) {
     companion object {
@@ -57,7 +54,7 @@ class CometChatAPI(private val context: Context) {
 
                 if (friends == null) activity.showToast("Failed to add a friend. please enter a valid ID")
                 else {
-                    for (friendName in friends.key) {
+                    for (friendName in friends.keys) {
                         Log.d(TAG, friends[friendName].toString())
 
                         if (friends[friendName] != null) {
@@ -78,8 +75,8 @@ class CometChatAPI(private val context: Context) {
         })
     }
 
-    interface CometChatFriendsServices {
-        @Header("accept: application/json", "Content-Type: application/json")
+    interface CometChatFriendsService {
+        @Headers("accept: application/json", "Content-Type: application/json")
         @POST("{version}/users/{userID}/friends")
         fun addFriend(
             @Header("apikey") apiKey: String,

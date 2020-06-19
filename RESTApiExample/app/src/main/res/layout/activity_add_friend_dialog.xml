@@ -10,14 +10,12 @@
         android:id="@+id/add_friend_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:hint="enter the SimpleChat ID!"
         android:gravity="center_horizontal"
-        app:layout_constraintTop_toTopOf="parent"
+        android:hint="Enter the SimpleChat ID!"
         app:layout_constraintBottom_toTopOf="@+id/add_friend_btn"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/add_friend_guide_text"

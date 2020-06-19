@@ -29,6 +29,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
 
     }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+
+    }
 }
 
 dependencies {
@@ -48,7 +53,7 @@ dependencies {
 
     //  FCM SDK
     implementation 'com.google.firebase:firebase-messaging:20.2.0'
-    implementation 'com.google.firebase:firebase-analytics:17.4.3'
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
 
     //  Retrofit2
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"

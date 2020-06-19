@@ -16,16 +16,23 @@ import com.cometchat.pro.exceptions.CometChatException
 import com.cometchat.pro.models.BaseMessage
 import com.cometchat.pro.models.TextMessage
 import com.todaysquare.restapiexample.R
+import com.todaysquare.restapiexample.ui.adapters.MessagesAdapter
 
 import kotlinx.android.synthetic.main.activity_messages.*
 
 class MessagesActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "MessagesActivity"
+        private const val listenerID = "MESSAGES_LISTENER"
+        private const val messagesFetchLimit = 50
+
+        private lateinit var layoutManager: LinearLayoutManager
+        private lateinit var messagesAdapter: MessagesAdapter
+        private lateinit var receiverID: String
+        private var isFetchingMessages = false
+        private var lastMessageID = -1
 
     }
-    private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var messagesAdapter: MessagesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +40,7 @@ class MessagesActivity : AppCompatActivity() {
 
         this.title = intent.getStringExtra("RECEIVER_NAME")
 
-        val receiverID = intent.getStringExtra("RECEIVER_ID")
+        receiverID = intent.getStringExtra("RECEIVER_ID")
 
         layoutManager = LinearLayoutManager(this)
         layoutManager.stackFromEnd = true
@@ -110,7 +117,7 @@ class MessagesActivity : AppCompatActivity() {
 
     private fun fetchMessages() {
         isFetchingMessages = true
-        var messagesRequest : MessagesRequest
+        val messagesRequest : MessagesRequest
 
         when (lastMessageID) {
             -1 -> messagesRequest = MessagesRequest.MessagesRequestBuilder()
@@ -135,13 +142,6 @@ class MessagesActivity : AppCompatActivity() {
                     lastMessageID = messages.first().id
                     Log.d(TAG, "Messages received successfully")
 
-//                    if (messages[0] is TextMessage){
-//                        Log.d(TAG, "Text message received successfully: " + messages.toString())
-//
-//                    }
-//                    if (messages[0] is MediaMessage){
-//                        Log.d(TAG, "Media message received successfully: " + messages.toString())
-//                    }
                 }
                 else Log.d(TAG, "Retrieved empty messages $lastMessageID")
                 isFetchingMessages = false

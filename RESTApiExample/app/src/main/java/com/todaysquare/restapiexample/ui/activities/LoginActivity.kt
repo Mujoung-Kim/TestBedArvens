@@ -6,13 +6,16 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.content.ContextCompat
+
 import com.cometchat.pro.constants.CometChatConstants
 import com.cometchat.pro.core.CometChat
 import com.cometchat.pro.exceptions.CometChatException
 import com.cometchat.pro.models.User
+import com.google.firebase.messaging.FirebaseMessaging
 import com.todaysquare.restapiexample.R
 import com.todaysquare.restapiexample.data.preferences.MySharedPreferences
 import com.todaysquare.restapiexample.utils.showToast
+
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -67,8 +70,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun subscribeNotification(userID: String) {
-        val topic = getString(R.string.appID) + "_${CometChatConstants.RECEIVER_TYPE_USER}_" +
-                    "${userID.FirebaseMessaging.getInstance().subscribeToTopic(topic)}"
+        val topic = "${getString(R.string.appID)}_${CometChatConstants.RECEIVER_TYPE_USER}_userID"
+
+        FirebaseMessaging.getInstance().subscribeToTopic(topic)
 
     }
 
