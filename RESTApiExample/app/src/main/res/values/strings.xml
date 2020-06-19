@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">RESTApiExample</string>
-    <string name="join_chat">Join chatting</string>
-    <string name="user_name">Enter the username join chatting</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-</resources>
