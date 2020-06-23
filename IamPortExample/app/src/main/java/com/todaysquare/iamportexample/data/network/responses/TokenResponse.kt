@@ -1,8 +1,11 @@
 package com.todaysquare.iamportexample.data.network.responses
 
+import androidx.annotation.Keep
+
+@Keep
 data class TokenResponse(
-    val access_token: String,
-    val expired_at: Int,
-    val now: Int
+    var access_token: String,
+    var expired_at: Int,
+    var now: Int
 
 )

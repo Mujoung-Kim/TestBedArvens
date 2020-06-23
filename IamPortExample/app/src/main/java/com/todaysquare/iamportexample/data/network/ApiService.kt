@@ -16,6 +16,13 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface ApiService {
+    @FormUrlEncoded
+    @POST(POST_GET_TOKEN)
+    fun getToken(
+        @Field(IMP_KEY) imp_key: String,
+        @Field(IMP_SECRET) imp_secret: String
+    ): Response<TokenResponse>
+
     companion object {
         operator fun invoke(networkConnectionInterceptor: NetworkConnectionInterceptor): ApiService {
             val okHttpClient = OkHttpClient.Builder()
@@ -31,12 +38,4 @@ interface ApiService {
 
         }
     }
-
-    @FormUrlEncoded
-    @POST(POST_GET_TOKEN)
-    fun getToken(
-        @Field(IMP_KEY) imp_key: String,
-        @Field(IMP_SECRET) imp_secret: String
-    ): Response<TokenResponse>
-
 }

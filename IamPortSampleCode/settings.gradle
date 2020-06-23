@@ -1,0 +1,2 @@
+rootProject.name='IamPortSampleCode'
+include ':app'
