@@ -24,6 +24,17 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+
+    }
+
     dataBinding {
         enabled = true
 
@@ -42,7 +53,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    //  appCompatDependencies
+    //  appCompatDependencies.
+
+    //  Coroutines
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
 
     //  Lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extension"
@@ -61,5 +76,7 @@ dependencies {
 
     //  OkHttp3
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
+
+    implementation "androidx.activity:activity-ktx:1.1.0"
 
 }
