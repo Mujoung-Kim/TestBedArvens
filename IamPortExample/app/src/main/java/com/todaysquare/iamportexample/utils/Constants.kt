@@ -21,4 +21,20 @@ class Constants {
 
         }
     }
+
+    class Tag {
+        companion object {
+            const val BASE_ACTIVITY = "BaseActivity Test"
+            const val MAIN_MODEL = "MainViewModel Test"
+            const val MAIN_REPOS = "MainRepository Test"
+
+        }
+    }
+
+    class String {
+        companion object {
+            const val KEY_SAVED_AT = "key_saved_at"
+
+        }
+    }
 }

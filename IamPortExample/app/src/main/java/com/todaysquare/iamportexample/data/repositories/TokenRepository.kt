@@ -12,7 +12,7 @@ package com.todaysquare.iamportexample.data.repositories
 //) : SafeApiRequest() {
 //
 //    suspend fun getTokens(): TokenResponse =
-//        apiRequest { api.getToken("${R.string.imp_key}", "${R.string.imp_secret}") }
+//        apiRequest { api.postToken("${R.string.imp_key}", "${R.string.imp_secret}") }
 //
 //    fun getAll() = database.getTokenDao().getTokens()
 //

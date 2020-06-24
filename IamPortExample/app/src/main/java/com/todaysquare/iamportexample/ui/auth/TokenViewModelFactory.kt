@@ -1,4 +1,4 @@
-package com.todaysquare.iamportexample.ui.viewmodel
+package com.todaysquare.iamportexample.ui.auth
 
 //import androidx.lifecycle.ViewModel
 //import androidx.lifecycle.ViewModelProvider

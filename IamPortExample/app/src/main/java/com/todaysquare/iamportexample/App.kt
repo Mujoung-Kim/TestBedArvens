@@ -5,9 +5,10 @@ import android.app.Application
 
 import com.todaysquare.iamportexample.data.network.ApiService
 import com.todaysquare.iamportexample.data.network.NetworkConnectionInterceptor
+import com.todaysquare.iamportexample.data.preferences.PreferenceProvider
+import com.todaysquare.iamportexample.data.repositories.MainRepository
+import com.todaysquare.iamportexample.ui.main.MainViewModelFactory
 //import com.todaysquare.iamportexample.data.repositories.TokenRepository
-//import com.todaysquare.iamportexample.ui.viewmodel.TokenViewModel
-//import com.todaysquare.iamportexample.ui.viewmodel.TokenViewModelFactory
 
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -23,6 +24,9 @@ class App : Application(), KodeinAware {
 
         bind() from singleton { NetworkConnectionInterceptor(instance()) }
         bind() from singleton { ApiService(instance()) }
+        bind() from singleton { PreferenceProvider(instance()) }
+        bind() from singleton { MainRepository(instance()) }
+        bind() from provider { MainViewModelFactory(instance()) }
 //        bind() from singleton { AppDatabase(instance()) }
 //        bind() from singleton { TokenRepository(instance(), instance()) }
 //        bind() from provider { TokenViewModelFactory(instance()) }
