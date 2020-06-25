@@ -1,0 +1,2 @@
+rootProject.name='DISampleCode_Koin'
+include ':app'
