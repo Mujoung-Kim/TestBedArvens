@@ -37,8 +37,23 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //  Koin-DI
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
+    //  Koin for kotlin
+    implementation "org.koin:koin-core:$koin_version"
+    //  Koin extended & experimental features
+    implementation "org.koin:koin-core-ext:$koin_version"
+    //  Koin for unit test
+    testImplementation "org.koin:koin-test:$koin_version"
+
+
+    //  Koin Androidx scope features
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    //  Koin Androidx fragment features
+    implementation "org.koin:koin-androidx-fragment:$koin_version"
+    //  Koin Androidx Experimental features
+    implementation "org.koin:koin-androidx-ext:$koin_version"
 
     //  Lifecycle-viewModel
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
