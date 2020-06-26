@@ -16,11 +16,6 @@ buildscript {
     }
 }
 
-ext {
-    kodeinVersion = '7.0.0'
-
-}
-
 allprojects {
     repositories {
         google()

@@ -1,4 +1,4 @@
-package com.todaysquare.kodeindemocoffemaker
+package com.todaysquare.kodeinfeatmvvm
 
 import org.junit.Test
 

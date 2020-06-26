@@ -1,4 +1,4 @@
-package com.todaysquare.kodeindemocoffemaker
+package com.todaysquare.kodeinfeatmvvm
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.todaysquare.kodeindemocoffemaker", appContext.packageName)
+        assertEquals("com.todaysquare.kodeinfeatmvvm", appContext.packageName)
     }
 }
