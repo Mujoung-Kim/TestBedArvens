@@ -15,6 +15,8 @@ import com.todaysquare.dagger2_example.BaseApplication
 import com.todaysquare.dagger2_example.R
 import com.todaysquare.dagger2_example.databinding.FragmentHomeBinding
 import com.todaysquare.dagger2_example.ui.viewmodels.HomeViewModel
+import com.todaysquare.dagger2_example.utils.Constants.Url.Companion.BASE_URL
+import com.todaysquare.dagger2_example.utils.Constants.Url.Companion.GET_BALANCE
 
 import javax.inject.Inject
 
@@ -39,13 +41,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val apiKey = sharedPreferences.getString("APIKEY","0000000")
+        val apiKey = sharedPreferences.getString("APIKEY","0000000") ?: ""
 
         homeViewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
 
         homeViewModel.isLoading().observe(this, Observer { isLoading ->
             if (isLoading) fragmentHomeBinding.progressBar.visibility = View.VISIBLE
             else fragmentHomeBinding.progressBar.visibility = View.INVISIBLE
+//            Log.d("Home", "$BASE_URL$GET_BALANCE$apiKey")
 
         })
 
@@ -54,7 +57,10 @@ class HomeFragment : Fragment() {
 
         })
 
-        homeViewModel
+        homeViewModel.getBalanceMutableLiveData(apiKey).observe(this, Observer { data ->
+            fragmentHomeBinding.balance = data
+
+        })
 
     }
 }

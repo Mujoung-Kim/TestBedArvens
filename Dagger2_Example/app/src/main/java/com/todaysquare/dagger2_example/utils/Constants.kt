@@ -6,9 +6,11 @@ class Constants {
             const val BASE_URL = "https://block.io/api/v2/"
 
             //  GET
-            const val GET_BALANCE = "get_balance"
+            const val GET_BALANCE = "get_balance/"
+            const val GET_TRANSACTIONS = "get_transactions/"
 
             //  POST
+            const val POST_WITHDRAW = "withdraw/"
 
         }
     }
@@ -16,6 +18,9 @@ class Constants {
     class Param {
         companion object {
             const val API_KEY = "api_key"
+            const val AMOUNTS = "amounts"
+            const val TO_ADDRESSES = "to_addresses"
+            const val TYPE = "type"
 
         }
     }

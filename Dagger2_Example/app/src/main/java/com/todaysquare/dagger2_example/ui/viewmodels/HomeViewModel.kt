@@ -20,13 +20,6 @@ class HomeViewModel @Inject constructor(private val balanceRepository: BalanceRe
     private val isLoading = MutableLiveData<Boolean>()
     private val errorDisplay = MutableLiveData<String>()
 
-    private fun getBalanceMutableLiveData(apiKey: String): MutableLiveData<Balance> {
-        loadData(apiKey)
-
-        return balanceMutableLiveData
-
-    }
-
     private fun loadData(apiKey: String) {
         isLoading.value = true
         disposable.add(balanceRepository.getBalance_Repository(apiKey)
@@ -36,6 +29,7 @@ class HomeViewModel @Inject constructor(private val balanceRepository: BalanceRe
             }, { error ->
                 isLoading.value = false
                 Log.e("Home", error.toString())
+
             })
         )
 
@@ -45,4 +39,10 @@ class HomeViewModel @Inject constructor(private val balanceRepository: BalanceRe
 
     fun errorDisplay(): LiveData<String> = errorDisplay
 
+    fun getBalanceMutableLiveData(apiKey: String): MutableLiveData<Balance> {
+        loadData(apiKey)
+
+        return balanceMutableLiveData
+
+    }
 }
