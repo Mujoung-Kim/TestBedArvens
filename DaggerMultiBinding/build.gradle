@@ -16,11 +16,17 @@ buildscript {
     }
 }
 
+ext {
+    dagger_version = '2.20'
+    retrofit_version = '2.3.0'
+
+}
+
 allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 
