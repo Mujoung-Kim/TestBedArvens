@@ -4,10 +4,12 @@ class Constants {
     class Url {
         companion object {
             const val BASE_URL = "https://block.io/api/v2/"
+            const val CRYPTO_URL = "https://min-api.cryptocompare.com/"
 
             //  GET
             const val GET_BALANCE = "get_balance/"
             const val GET_TRANSACTIONS = "get_transactions/"
+            const val GET_CRYPTO = "data/v2/histohour?fsym=BTC&tsym=USD&limit=10"
 
             //  POST
             const val POST_WITHDRAW = "withdraw/"

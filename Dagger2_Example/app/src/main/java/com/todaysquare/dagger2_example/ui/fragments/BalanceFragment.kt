@@ -58,6 +58,7 @@ class BalanceFragment : Fragment() {
 
         transactionViewModel.getTransactionMutableLiveData(apiKey, "sent")
             .observe(this, Observer { data ->
+                fragmentBalanceBinding.balance = data
                 Log.d("Transaction", data.toString())
 
         })

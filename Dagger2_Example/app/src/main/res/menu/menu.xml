@@ -16,4 +16,9 @@
         android:title="Balance"
         android:icon="@drawable/ic_person_black_24dp" />
 
+    <item
+        android:id="@+id/stock"
+        android:title="Stock"
+        android:icon="@drawable/ic_trending_up_black_24dp" />
+
 </menu>

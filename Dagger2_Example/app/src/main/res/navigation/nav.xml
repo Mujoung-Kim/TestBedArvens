@@ -46,6 +46,14 @@
         <action
             android:id="@+id/action_balance_to_account"
             app:destination="@id/account" />
+        <action
+            android:id="@+id/action_balance_to_stockFragment"
+            app:destination="@id/stock" />
     </fragment>
+    <fragment
+        android:id="@+id/stock"
+        android:name="com.todaysquare.dagger2_example.ui.fragments.StockFragment"
+        android:label="fragment_stock"
+        tools:layout="@layout/fragment_stock" />
 
 </navigation>
