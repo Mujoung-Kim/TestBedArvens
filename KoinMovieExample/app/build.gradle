@@ -58,8 +58,14 @@ dependencies {
     //  Koin
     implementation "org.koin:koin-androidx-viewmodel:2.0.1"
 
+    //  Material
+    implementation 'com.google.android.material:material:1.1.0-beta01'
+
     //  Picasso
     implementation "com.squareup.picasso:picasso:2.71828"
+
+    //  RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     //  Retrofit2
     implementation "com.squareup.retrofit2:retrofit:2.6.2"

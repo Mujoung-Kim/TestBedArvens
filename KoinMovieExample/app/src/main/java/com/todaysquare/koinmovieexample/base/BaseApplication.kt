@@ -2,6 +2,7 @@ package com.todaysquare.koinmovieexample.base
 
 import android.app.Application
 
+import com.todaysquare.koinmovieexample.di.modules.movieModule
 import com.todaysquare.koinmovieexample.di.modules.picassoModule
 import com.todaysquare.koinmovieexample.di.modules.retrofitModule
 
@@ -18,7 +19,7 @@ class BaseApplication : Application() {
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@BaseApplication)
-            modules(listOf(retrofitModule, picassoModule))
+            modules(listOf(retrofitModule, picassoModule, movieModule))
 
         }
     }
