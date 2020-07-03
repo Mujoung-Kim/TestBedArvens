@@ -121,5 +121,6 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
-Constants
+Constants.kt
 
+app/libs/
