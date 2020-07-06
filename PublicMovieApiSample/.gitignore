@@ -121,6 +121,6 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
-Constants.kt
+com/todaysquare/publicmovieapisample/utils/Constants.kt
 
 app/libs/

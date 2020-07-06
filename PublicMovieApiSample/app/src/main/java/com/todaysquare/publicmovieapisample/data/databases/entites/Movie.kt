@@ -1,9 +1,9 @@
 package com.todaysquare.publicmovieapisample.data.databases.entites
 
-import android.os.Parcel
 import android.os.Parcelable
+import com.todaysquare.publicmovieapisample.ui.adapters.AdapterType
+import com.todaysquare.publicmovieapisample.ui.adapters.ViewType
 
-import kotlinx.android.parcel.Parceler
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -14,8 +14,12 @@ data class Movie(
     val release_data: String,
     val poster_path: String,
     val overview: String?
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
+
+) : ViewType, Parcelable {
+
+    override fun getViewType(): Int = AdapterType.MOVIE
+
+    /*constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readFloat(),
         parcel.readString()!!,
@@ -39,5 +43,5 @@ data class Movie(
 
         override fun create(parcel: Parcel): Movie = Movie(parcel)
 
-    }
+    }*/
 }

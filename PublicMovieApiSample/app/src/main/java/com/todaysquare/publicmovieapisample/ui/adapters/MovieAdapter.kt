@@ -1,4 +1,4 @@
-package com.todaysquare.publicmovieapisample.di.adapters
+package com.todaysquare.publicmovieapisample.ui.adapters
 
 import android.view.ViewGroup
 import androidx.collection.SparseArrayCompat
@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.todaysquare.publicmovieapisample.data.databases.entites.Movie
 
-class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MovieAdapter(listener: MovieItemAdapter.ViewSelectedListener)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var items: ArrayList<ViewType>
     private var delegateAdapters = SparseArrayCompat<ItemAdapter>()
     private val loadingItem = object : ViewType {
@@ -16,7 +17,7 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     init {
         delegateAdapters.put(AdapterType.LOADING, LoadingItemAdapter())
-        delegateAdapters.put(AdapterType.MOVIE, MovieItemAdapter())
+        delegateAdapters.put(AdapterType.MOVIE, MovieItemAdapter(listener))
         items = ArrayList()
         items.add(loadingItem)
 

@@ -1,4 +1,4 @@
-package com.todaysquare.publicmovieapisample.base
+package com.todaysquare.publicmovieapisample.ui.bases
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

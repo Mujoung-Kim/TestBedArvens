@@ -1,4 +1,4 @@
-package com.todaysquare.publicmovieapisample.di.adapters
+package com.todaysquare.publicmovieapisample.ui.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

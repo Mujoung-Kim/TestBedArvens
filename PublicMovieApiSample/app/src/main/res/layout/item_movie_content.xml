@@ -35,30 +35,30 @@
                 android:text="Title"
                 android:textColor="#000000"
                 android:textSize="17sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <RatingBar
                 android:id="@+id/rate_vote_average"
+                style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
                 android:isIndicator="true"
                 android:numStars="5"
                 android:progressTint="@color/colorRateMovie"
                 android:rating="1.5"
-                android:stepSize="0.5"
-                style="@style/Widget.AppCompat.RatingBar.Small"/>
+                android:stepSize="0.5" />
 
             <TextView
                 android:id="@+id/textView_release_data"
-                android:text="개봉일 : 2018-01-01"
-                style="@style/screen_text"/>
+                style="@style/screen_text"
+                android:text="개봉일 : 2020-07-06" />
 
             <TextView
                 android:id="@+id/textView_overview"
-                android:text="영화 설명을 나타냅니다."
-                style="@style/screen_text"/>
+                style="@style/screen_text"
+                android:text="영화 설명을 나타냅니다." />
 
         </LinearLayout>
 
