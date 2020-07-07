@@ -1,3 +1,5 @@
+@file:JvmName("ExtensionsUtils")
+
 package com.todaysquare.publicmovieapisample.utils
 
 import android.text.TextUtils

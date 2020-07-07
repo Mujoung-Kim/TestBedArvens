@@ -30,6 +30,7 @@ class MovieActivity : AppCompatActivity() {
 
     }
 
+    // 프레그먼트 가이드: https://developer.android.com/guide/components/fragments?hl=ko
     override fun onBackPressed() {
         val fragmentManager = supportFragmentManager
 

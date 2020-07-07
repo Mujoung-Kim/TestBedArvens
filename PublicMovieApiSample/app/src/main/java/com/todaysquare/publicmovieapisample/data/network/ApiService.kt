@@ -11,9 +11,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
-/*
+//  전체적인 부분 커스터 마이징 해서 적용해야됨.
 interface ApiService {
-    companion object {
+    /*companion object {
         operator fun invoke(): ApiService {
             val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -35,6 +35,6 @@ interface ApiService {
     fun getTop(@QueryMap par: Map<String, String>): Call<MovieListResponse>
 
     @GET(GET_DISCOVER)
-    fun getDeferredTop(@QueryMap par: Map<String, String>): Deferred<MovieListResponse>
+    fun getDeferredTop(@QueryMap par: Map<String, String>): Deferred<MovieListResponse>*/
 
-}*/
+}

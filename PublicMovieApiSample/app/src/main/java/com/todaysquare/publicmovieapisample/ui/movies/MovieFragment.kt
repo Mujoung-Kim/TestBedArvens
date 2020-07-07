@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,8 +65,8 @@ class MovieFragment : RxBaseFragment(), MovieItemAdapter.ViewSelectedListener {
             clearOnScrollListeners()
             addOnScrollListener(InfiniteScrollListener({ requestMovie() }, linearLayout))
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                layoutManager = LinearLayoutManager(context)
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+//                layoutManager = LinearLayoutManager(context)
 
         }
 
@@ -138,6 +139,7 @@ class MovieFragment : RxBaseFragment(), MovieItemAdapter.ViewSelectedListener {
 
             } catch (error: Throwable) {
                 recyclerView_movie_list.snackbar(error.message.orEmpty(), "RETRY") {
+                    Log.d("error", error.message.orEmpty())
                     requestMovie()
 
                 }

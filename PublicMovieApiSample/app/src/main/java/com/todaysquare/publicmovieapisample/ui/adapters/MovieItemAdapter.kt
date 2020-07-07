@@ -20,7 +20,7 @@ class MovieItemAdapter(val viewActions: ViewSelectedListener) : ItemAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder = MovieViewHolder(parent)
 
-    @Suppress("CAST_NEVER_SUCCEEDS")
+//    @Suppress("CAST_NEVER_SUCCEEDS")
     override fun onBindVIewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
         holder as MovieViewHolder
         holder.bind(item as Movie)
@@ -45,7 +45,7 @@ class MovieItemAdapter(val viewActions: ViewSelectedListener) : ItemAdapter {
             voteCount.text = "${item.vote_count} 투표"
             releaseDate.text = item.release_data
             overView.text = item.overview
-            rateAverage.rating = item.vote_average
+            rateAverage.rating = item.vote_average / 2
 
             super.itemView.setOnClickListener {
                 viewActions.onItemSelected(IMAGE_URL + item.poster_path)
