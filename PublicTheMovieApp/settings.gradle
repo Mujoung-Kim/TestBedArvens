@@ -1,0 +1,2 @@
+rootProject.name='PublicTheMovieApp'
+include ':app'

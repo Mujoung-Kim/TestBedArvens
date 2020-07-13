@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PublicTheMovieApp</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="mock_list">
+        <item>data1</item>
+        <item>data2</item>
+        <item>data3</item>
+        <item>data4</item>
+        <item>data5</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
