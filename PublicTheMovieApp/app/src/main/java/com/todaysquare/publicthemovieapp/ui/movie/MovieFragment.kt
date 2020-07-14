@@ -1,5 +1,6 @@
 package com.todaysquare.publicthemovieapp.ui.movie
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -7,12 +8,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 
+import com.todaysquare.publicthemovieapp.MainActivity
 import com.todaysquare.publicthemovieapp.R
 import com.todaysquare.publicthemovieapp.TheMoviePopularApp
 import com.todaysquare.publicthemovieapp.data.models.MovieList
-import com.todaysquare.publicthemovieapp.ui.InfiniteScrollListener
+import com.todaysquare.publicthemovieapp.ui.listeners.InfiniteScrollListener
 import com.todaysquare.publicthemovieapp.ui.RxBaseFragment
 import com.todaysquare.publicthemovieapp.ui.adapter.MovieAdapter
 import com.todaysquare.publicthemovieapp.ui.adapter.MovieItemAdapter
@@ -34,7 +37,14 @@ import javax.inject.Inject
 class MovieFragment : RxBaseFragment(), MovieItemAdapter.ViewSelectedListener {
     @Inject lateinit var movieManager: MovieManager
     private var theMovieList: MovieList? = null
+    private var listener: OnResultListener? = null
+    private var activity = MainActivity()
     private val movieAdapter by androidLazy { MovieAdapter(this) }
+
+    interface OnResultListener {
+        fun onResult(value: String)
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         TheMoviePopularApp.movieComponent.inject(this)
@@ -87,7 +97,20 @@ class MovieFragment : RxBaseFragment(), MovieItemAdapter.ViewSelectedListener {
 
     }
 
-    /*override fun onItemSelected(url: String?) {
+    //  fragment screen switching function. -> 화면 붙을 때 동작
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        activity = getActivity() as MainActivity
+
+    }
+
+    fun setListener(listener: OnResultListener) {
+        this.listener = listener
+
+    }
+
+    override fun onItemSelected(url: String?) {
         if (url.isNullOrEmpty())
             recycler_movie_list.snackbar("No URL assigned to this results")
         else {
@@ -97,23 +120,45 @@ class MovieFragment : RxBaseFragment(), MovieItemAdapter.ViewSelectedListener {
             startActivity(intent)
 
         }
-    }*/
+    }
 
-    override fun onDownloadItem(url: String?) {
+    /*override fun onDownloadItem(url: String?) {
+//        val downloadFragment = DownloadFragment()
+//        val fragmentManager: FragmentManager? = null
+//        var bundle = this.arguments
+
         if (url.isNullOrEmpty())
             recycler_movie_list.snackbar("Not found poster path. check this path")
         else {
-            val intent = Intent(context, DownloadFragment::class.java)
 
-            //  add to download function.
-//            intent.data = Uri.parse(url)
-            intent.putExtra("PosterPath", url)
+            //  add to download link binding function.
+            Log.d("Test", url)
+            listener?.onResult(url)
+//            bundle = if (bundle == null) Bundle()
+//            else Bundle(bundle)
+//            bundle.putString("PosterPath", url)
+//            Log.d("Test", bundle.getString("PosterPath").toString())
 
-            //  binding fragment
-            startActivity(intent)
+            //  압축한 과정 데이터 전달 부분 에러
+            DownloadFragment().apply {
+                arguments = Bundle().apply {
+                    putString("PosterPath", url)
+
+                }
+            }
+//            fragmentManager?.putFragment(bundle, "PosterPath", downloadFragment)
+//            Log.d("Test", "DownBundle = ${Bundle().getString("PosterPath")}")
+//            Log.d("Test", "DownArgument = ${DownloadFragment().arguments}")
+//            Log.d("Test", "DownFragment = ${DownloadFragment()}")
+
+            //  fragment to fragment screen switching and dataBinding.
+//            downloadFragment.arguments = bundle
+//            Log.d("Test", "arguments = ${downloadFragment.arguments}")
+//            Log.d("Test", "fragment = $downloadFragment")
+            activity.changeFragment(1)
 
         }
-    }
+    }*/
 
     private fun requestMovie() {
         job = GlobalScope.launch(Dispatchers.Main) {

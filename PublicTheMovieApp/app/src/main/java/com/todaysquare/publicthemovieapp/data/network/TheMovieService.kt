@@ -24,7 +24,7 @@ interface TheMovieService {
 //    @GET("$IMAGE_URL{poster_path}")
 
 //    @Streaming
-//    @GET
+//    @GET("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg")
 //    fun downloadImage(@Url imageUrl: String): Call<ResponseBody>
 
 }

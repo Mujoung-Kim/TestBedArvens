@@ -2,12 +2,14 @@ package com.todaysquare.publicthemovieapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
 import com.google.android.material.snackbar.Snackbar
+import com.todaysquare.publicthemovieapp.ui.download.DownloadFragment
 import com.todaysquare.publicthemovieapp.ui.movie.MovieFragment
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,17 +27,23 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+//        Log.d("Test", "MainActivity = $savedInstanceState")
         if (savedInstanceState == null)
-            changeFragment(MovieFragment())
+            changeFragment()
 
     }
 
-    fun changeFragment(fragment: Fragment, cleanStack: Boolean = false) {
+    //  이 부분 수정해서 fragmentA -> fragmentB 로 전환 ==> 수정완료.
+    fun changeFragment(fragmentNum: Int = 0) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        fragmentTransaction.replace(R.id.base_content, fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
+        Log.d("MainTest", fragmentNum.toString())
+
+        if (fragmentNum == 0) fragmentTransaction.replace(R.id.action_container, MovieFragment())
+                .addToBackStack(null).commitAllowingStateLoss()
+        else if (fragmentNum == 1)
+            fragmentTransaction.replace(R.id.action_container, DownloadFragment())
+            .addToBackStack(null).commitAllowingStateLoss()
 
     }
 

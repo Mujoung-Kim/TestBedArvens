@@ -1,4 +1,4 @@
-package com.todaysquare.publicthemovieapp.ui
+package com.todaysquare.publicthemovieapp.ui.listeners
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
