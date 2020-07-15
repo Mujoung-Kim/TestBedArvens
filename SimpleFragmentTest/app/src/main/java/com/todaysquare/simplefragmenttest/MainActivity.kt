@@ -9,10 +9,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment,
-                MyFragment().apply {
+        supportFragmentManager.beginTransaction().add(R.id.main_container,
+                MyFragment()/*.apply {
                     arguments = Bundle().apply { putString("kkk", "this url") }
-                }).commit()
+                }*/).commit()
 
     }
 }

@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".MyFragment">
 
-    <TextView
-        android:id="@+id/text_fragment"
+    <EditText
+        android:id="@+id/edit_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
+        android:hint="@string/please_input_data"
         android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginBottom="60dp" />
 
@@ -17,6 +17,7 @@
         android:id="@+id/button_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/send"
         android:layout_gravity="center_horizontal|center_vertical"/>
 
 </FrameLayout>
