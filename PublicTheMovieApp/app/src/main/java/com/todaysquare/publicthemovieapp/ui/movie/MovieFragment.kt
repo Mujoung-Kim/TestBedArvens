@@ -1,14 +1,11 @@
 package com.todaysquare.publicthemovieapp.ui.movie
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.todaysquare.publicthemovieapp.MainActivity
@@ -37,14 +34,8 @@ import javax.inject.Inject
 class MovieFragment : RxBaseFragment(), MovieItemAdapter.ViewSelectedListener {
     @Inject lateinit var movieManager: MovieManager
     private var theMovieList: MovieList? = null
-    private var listener: OnResultListener? = null
     private var activity = MainActivity()
     private val movieAdapter by androidLazy { MovieAdapter(this) }
-
-    interface OnResultListener {
-        fun onResult(value: String)
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         TheMoviePopularApp.movieComponent.inject(this)
@@ -105,12 +96,7 @@ class MovieFragment : RxBaseFragment(), MovieItemAdapter.ViewSelectedListener {
 
     }
 
-    fun setListener(listener: OnResultListener) {
-        this.listener = listener
-
-    }
-
-    override fun onItemSelected(url: String?) {
+    /*override fun onItemSelected(url: String?) {
         if (url.isNullOrEmpty())
             recycler_movie_list.snackbar("No URL assigned to this results")
         else {
@@ -120,45 +106,32 @@ class MovieFragment : RxBaseFragment(), MovieItemAdapter.ViewSelectedListener {
             startActivity(intent)
 
         }
-    }
+    }*/
 
-    /*override fun onDownloadItem(url: String?) {
-//        val downloadFragment = DownloadFragment()
-//        val fragmentManager: FragmentManager? = null
-//        var bundle = this.arguments
+    override fun onDownloadItem(url: String?) {
+        val downloadFragment = DownloadFragment()
+        var bundle = this.arguments
 
         if (url.isNullOrEmpty())
             recycler_movie_list.snackbar("Not found poster path. check this path")
         else {
-
             //  add to download link binding function.
             Log.d("Test", url)
-            listener?.onResult(url)
-//            bundle = if (bundle == null) Bundle()
-//            else Bundle(bundle)
-//            bundle.putString("PosterPath", url)
-//            Log.d("Test", bundle.getString("PosterPath").toString())
 
-            //  압축한 과정 데이터 전달 부분 에러
-            DownloadFragment().apply {
-                arguments = Bundle().apply {
-                    putString("PosterPath", url)
-
-                }
-            }
-//            fragmentManager?.putFragment(bundle, "PosterPath", downloadFragment)
-//            Log.d("Test", "DownBundle = ${Bundle().getString("PosterPath")}")
-//            Log.d("Test", "DownArgument = ${DownloadFragment().arguments}")
-//            Log.d("Test", "DownFragment = ${DownloadFragment()}")
+            bundle = if (bundle == null) Bundle()
+            else Bundle(bundle)
+            bundle.putString("PosterPath", url)
 
             //  fragment to fragment screen switching and dataBinding.
-//            downloadFragment.arguments = bundle
-//            Log.d("Test", "arguments = ${downloadFragment.arguments}")
-//            Log.d("Test", "fragment = $downloadFragment")
-            activity.changeFragment(1)
+            //  왜 DownloadFragment()로 넘기면 안되는 거지?
+            //  bundle data MainActivity 에서 받는 것도 고려
+            downloadFragment.arguments = bundle
+            fragmentManager?.beginTransaction()?.replace(R.id.action_container, downloadFragment)
+                ?.commitAllowingStateLoss()
+//            activity.changeFragment(1)
 
         }
-    }*/
+    }
 
     private fun requestMovie() {
         job = GlobalScope.launch(Dispatchers.Main) {

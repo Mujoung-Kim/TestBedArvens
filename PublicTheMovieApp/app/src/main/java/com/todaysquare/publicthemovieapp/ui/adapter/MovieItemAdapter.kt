@@ -17,8 +17,8 @@ import org.jetbrains.anko.design.snackbar
 class MovieItemAdapter(val viewActions: ViewSelectedListener) : ItemAdapter {
 
     interface ViewSelectedListener {
-        fun onItemSelected(url: String?)
-//        fun onDownloadItem(url: String?)
+//        fun onItemSelected(url: String?)
+        fun onDownloadItem(url: String?)
 
     }
 
@@ -51,8 +51,8 @@ class MovieItemAdapter(val viewActions: ViewSelectedListener) : ItemAdapter {
             textAverage.rating = item.vote_average / 2
 
             super.itemView.setOnClickListener {
-                viewActions.onItemSelected(IMAGE_URL + item.poster_path)
-//                viewActions.onDownloadItem(IMAGE_URL + item.poster_path)
+//                viewActions.onItemSelected(IMAGE_URL + item.poster_path)
+                viewActions.onDownloadItem(IMAGE_URL + item.poster_path)
 
             }
 

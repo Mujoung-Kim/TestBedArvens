@@ -12,7 +12,6 @@
             android:id="@+id/show_poster"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/img_default" />
+            android:scaleType="centerCrop" />
 
 </LinearLayout>
