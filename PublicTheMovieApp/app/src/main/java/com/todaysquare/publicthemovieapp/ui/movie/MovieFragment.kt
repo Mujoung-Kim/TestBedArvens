@@ -126,9 +126,9 @@ class MovieFragment : RxBaseFragment(), MovieItemAdapter.ViewSelectedListener {
             //  왜 DownloadFragment()로 넘기면 안되는 거지?
             //  bundle data MainActivity 에서 받는 것도 고려
             downloadFragment.arguments = bundle
-            fragmentManager?.beginTransaction()?.replace(R.id.action_container, downloadFragment)
-                ?.commitAllowingStateLoss()
-//            activity.changeFragment(1)
+//            fragmentManager?.beginTransaction()?.replace(R.id.action_container, downloadFragment)
+//                ?.addToBackStack(null)?.commitAllowingStateLoss()
+            activity.changeFragment(1, bundle)
 
         }
     }
@@ -155,6 +155,7 @@ class MovieFragment : RxBaseFragment(), MovieItemAdapter.ViewSelectedListener {
                 if (isVisible)
                     recycler_movie_list.snackbar(error.message.orEmpty(), "RETRY") {
                         //  log 사용해 error.message 전문 확인 필요
+                        Log.d("MovieTest", error.message.toString())
                         requestMovie()
 
                     }

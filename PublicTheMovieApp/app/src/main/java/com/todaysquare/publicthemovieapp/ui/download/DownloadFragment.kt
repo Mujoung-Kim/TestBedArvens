@@ -14,16 +14,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 import com.todaysquare.publicthemovieapp.R
+import com.todaysquare.publicthemovieapp.ui.adapter.LoadingItemAdapter
 import com.todaysquare.publicthemovieapp.utils.loading
 
-import kotlinx.android.synthetic.main.item_movie.*
-import kotlinx.android.synthetic.main.item_movie.view.*
-import org.jetbrains.anko.imageResource
-import org.jetbrains.anko.imageURI
+import kotlinx.android.synthetic.main.frag_download.*
 
 import org.jetbrains.anko.support.v4.toast
 
@@ -39,6 +35,7 @@ class DownloadFragment : Fragment() {
     private var downloadID: Long = 0
     private var posterUrl: String? = null
     private var fileName: String? = null
+    private var posterName: String? = null
     private var posterPath: String? = null
     private var intentFilter = IntentFilter()
     private val downloadComplete = object : BroadcastReceiver() {
@@ -60,8 +57,8 @@ class DownloadFragment : Fragment() {
 
                     if (status == DownloadManager.STATUS_SUCCESSFUL) {
                         try {
-                            Log.d(TAG, "status = $status")
-                            Log.d(TAG, "DownloadManager = ${DownloadManager.STATUS_SUCCESSFUL}")
+//                            Log.d(TAG, "status = $status")
+//                            Log.d(TAG, "DownloadManager = ${DownloadManager.STATUS_SUCCESSFUL}")
                             showPoster()
 
                         } catch (error: FileNotFoundException) {
@@ -88,8 +85,8 @@ class DownloadFragment : Fragment() {
 
         posterUrl = this.arguments?.getString("PosterPath")
         fileName = split?.get(split.size - 1) ?: "cannot binding data"
-        Log.d(TAG, "split = $split")
-        Log.d(TAG, "fileName = $fileName")
+        Log.d(TAG, "splitM = $split")
+        Log.d(TAG, "fileNameM = $fileName")
 
         if (posterUrl == null)
             toast("dataBinding failed. please check connection.")
@@ -108,16 +105,24 @@ class DownloadFragment : Fragment() {
         downloadManager = requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
         try {
-            val posterUrl = Uri.parse(posterUrl)
+            checkFile()
+            Log.d(TAG, "fileNameD = $fileName")
+            Log.d(TAG, "displayNameD = $posterName")
+            Log.d(TAG, "posterPathD = $posterPath")
 
-            Log.d(TAG, posterUrl.toString())
-            Log.d(TAG, "fileName = $fileName")
+            if (fileName != posterName) {
+                val posterUri = Uri.parse(posterUrl)
 
-            val request = DownloadManager.Request(posterUrl)
-                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
+                Log.d(TAG, posterUri.toString())
 
-            downloadID = downloadManager.enqueue(request)
+                val request = DownloadManager.Request(posterUri)
+                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
+
+                downloadID = downloadManager.enqueue(request)
+
+            } else if (fileName == posterName)
+                show_poster.loading(posterPath.toString())
 
         } catch (error: IOException) {
             error.printStackTrace()
@@ -142,20 +147,61 @@ class DownloadFragment : Fragment() {
                 val displayColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME)
                 val typeColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.MIME_TYPE)
                 val sizeColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE)
-                val imagePoster = view?.findViewById<ImageView>(R.id.image_poster)
 
-                if (it.moveToNext()) {
+                while (it.moveToNext()) {
                     val id = it.getInt(idColumn)
                     val display = it.getString(displayColumn)
                     val type = it.getString(typeColumn)
                     val size = it.getLong(sizeColumn)
-
-                    posterPath = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    val posterUri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                         id.toString()).toString()
-                    Log.d(TAG, "id = $id, display = $display, type = $type, size = $size, posterUri = $posterPath")
-                    imagePoster?.loading(posterPath.toString())
-                    Log.d(TAG, "posterPath ${posterPath.toString()}")
 
+                    Log.d(TAG, "id = $id, display = $display, type = $type, size = $size, posterUri = $posterUri")
+                    /*if (posterUri == posterPath) {
+                        posterPath = posterUri
+
+                        Log.d(TAG, "posterUriS = $posterUri")
+                        Log.d(TAG, "posterPathS = $posterPath")
+                        show_poster.loading(posterPath.toString())
+
+                    } else*/
+                        show_poster.loading(posterUri)
+
+                }
+            }
+
+        return cursor!!
+
+    }
+
+    private fun checkFile() {
+        val projection = arrayOf(
+            MediaStore.Images.Media._ID,
+            MediaStore.Images.Media.DISPLAY_NAME)
+//        val selection = "${MediaStore.Images.Media.DISPLAY_NAME} == $fileName"
+        val sortOrder = "${MediaStore.Images.Media._ID} ASC"
+        val cursor = context?.contentResolver?.query(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            projection, /*selection*/null, null, sortOrder)
+            ?.use {
+                val idColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
+                val displayColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME)
+
+                while (it.moveToNext()) {
+                    val id = it.getInt(idColumn)
+                    val display = it.getString(displayColumn)
+
+                    Log.d(TAG, "id = $id, display = $display")
+                    if (display == fileName) {
+                        posterName = display
+                        posterPath = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                            id.toString()).toString()
+
+                        Log.d(TAG, "displayNameC = $display")
+                        Log.d(TAG, "posterNameC = $posterName")
+                        Log.d(TAG, "posterPathC = $posterPath")
+
+                    }
                 }
             }
 

@@ -34,16 +34,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     //  이 부분 수정해서 fragmentA -> fragmentB 로 전환 ==> 수정완료.
-    fun changeFragment(fragmentNum: Int = 0) {
+    fun changeFragment(fragmentNum: Int = 0, bundle: Bundle? = null) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        Log.d("MainTest", fragmentNum.toString())
+        Log.d("MainTest", "fragmentNum = $fragmentNum, bundle = $bundle")
 
-        if (fragmentNum == 0) fragmentTransaction.replace(R.id.action_container, MovieFragment())
-                .addToBackStack(null).commitAllowingStateLoss()
+        if (fragmentNum == 0) fragmentTransaction.replace(R.id.action_container, MovieFragment().apply {
+            arguments = bundle }).addToBackStack(null).commitAllowingStateLoss()
         else if (fragmentNum == 1)
-            fragmentTransaction.replace(R.id.action_container, DownloadFragment())
-            .addToBackStack(null).commitAllowingStateLoss()
+            fragmentTransaction.replace(R.id.action_container, DownloadFragment().apply {
+                arguments = bundle }).addToBackStack(null).commitAllowingStateLoss()
 
     }
 
