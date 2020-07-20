@@ -31,19 +31,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val mAdapter = CustomAdapter()
-        val retrofit = Retrofit.Builder()
+        /*val retrofit = Retrofit.Builder()
             .baseUrl(BASE_GIT)
             .addConverterFactory(GsonConverterFactory.create())
-            .build()
+            .build()*/
 
         recyclerView.adapter = mAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         buttonRequest.setOnClickListener {
-//            val gitRestApi = GitRestApi()
-//
-//            gitRestApi.startRetrofit()
+            val gitRestApi = GitRestApi()
 
-            val githubService = retrofit.create(GithubService::class.java)
+            gitRestApi.startRetrofit(mAdapter)
+
+            /*val githubService = retrofit.create(GithubService::class.java)
 
             githubService.users().enqueue(object : Callback<List<RepositoryItem>>{
                 override fun onFailure(call: Call<List<RepositoryItem>>, t: Throwable) {
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                     mAdapter.notifyDataSetChanged()
 
                 }
-            })
+            })*/
         }
     }
 }

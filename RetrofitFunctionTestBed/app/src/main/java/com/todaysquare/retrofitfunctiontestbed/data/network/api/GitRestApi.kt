@@ -27,9 +27,7 @@ class GitRestApi {
 
     }
 
-    fun startRetrofit() {
-        val mAdapter = CustomAdapter()
-
+    fun startRetrofit(mAdapter: CustomAdapter) {
         githubService.users().enqueue(object : Callback<List<RepositoryItem>> {
             override fun onFailure(call: Call<List<RepositoryItem>>, t: Throwable) {
 
