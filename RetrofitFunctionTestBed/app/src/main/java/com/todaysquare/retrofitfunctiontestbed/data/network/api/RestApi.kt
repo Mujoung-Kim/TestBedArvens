@@ -7,6 +7,7 @@ import com.todaysquare.retrofitfunctiontestbed.data.model.Funding
 import com.todaysquare.retrofitfunctiontestbed.data.network.ApiServiceInterface
 import com.todaysquare.retrofitfunctiontestbed.data.network.response.ResponseWrapper
 import com.todaysquare.retrofitfunctiontestbed.utils.Constants.Url.Companion.BASE_URL
+import com.todaysquare.retrofitfunctiontestbed.utils.SPUtil
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -23,16 +24,17 @@ import timber.log.Timber
 
 //  Retrofit body
 class RestApi {
-    private val apiServiceInterface: ApiServiceInterface
+    /*private val apiServiceInterface: ApiServiceInterface
     private val commonNetworkInterceptor = object : Interceptor {
         override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+            val gson = Gson()
             val newRequest = chain.request().newBuilder()
                 .addHeader("token", SPUtil.accessToken).build()
             val response = chain.proceed(newRequest)
             val rawJson = response.body()?.string() ?: "{}"
             val type = object : TypeToken<ResponseWrapper<*>>() {}.type
             val res = try {
-                val r = Gson().fromJson<ResponseWrapper<*>>(rawJson, type)
+                val r = gson.fromJson<ResponseWrapper<*>>(rawJson, type)
                     ?: throw JsonSyntaxException("Parse Fail")
 
                 if (!r.success)
@@ -47,8 +49,12 @@ class RestApi {
                 ResponseWrapper<Any>(-999, false, "unknown error : $t", null)
 
             }
+            val dataJson = gson.toJson(res.data)
 
-            return response
+            return response.newBuilder()
+                .message(res.message)
+                .body(dataJson.toResponseBody())
+                .build()
 
         }
     }
@@ -71,24 +77,22 @@ class RestApi {
     //  Create a retrofit function for you to use.
     fun testBed() {
         apiServiceInterface.listFundingHistories()
-            .enqueue(object : Callback<ResponseWrapper<List<Funding>>>{
-                override fun onFailure(call: Call<ResponseWrapper<List<Funding>>>, t: Throwable) {
+            .enqueue(object : Callback<List<Funding>>{
+                override fun onFailure(call: Call<List<Funding>>, t: Throwable) {
                     Timber.e("network request failure.")
 
                 }
 
-                override fun onResponse(call: Call<ResponseWrapper<List<Funding>>>,
-                    response: Response<ResponseWrapper<List<Funding>>>) {
+                override fun onResponse(call: Call<List<Funding>>,
+                    response: Response<List<Funding>>) {
 
                     if (response.isSuccessful)
-                        if (response.body()?.success == true)
-                            if (response.body()?.data != null) Timber.e("we want dis data: ${response.body()!!.data!!}")
-                            else Timber.e("network request failure. !")
-                        else Timber.e("network request failure. !!")
+                        if (response.body() != null) Timber.e("we want dis data: ${response.body()!!}")
+                        else Timber.e("network request failure. !")
                     else Timber.e("network request failure. !!!")
 
                 }
             })
 
-    }
+    }*/
 }

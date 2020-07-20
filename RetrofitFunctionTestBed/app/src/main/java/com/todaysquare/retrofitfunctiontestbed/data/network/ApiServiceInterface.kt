@@ -31,8 +31,11 @@ interface ApiServiceInterface {
 //        @Query("one_line") one_line: String?
 //    ): Call<DataModel.PutResponse>
 
-    @GET("mypage/fundlist")
-    fun listFundingHistories(): Call<ResponseWrapper<List<Funding>>>
+//    @GET("mypage/fundlist")
+//    fun listFundingHistories(): Call<ResponseWrapper<List<Funding>>>
+
+//    @GET("mypage/fundlist")
+//    fun listFundingHistories(): Call<List<Funding>>
 
 }
 
