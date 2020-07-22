@@ -9,6 +9,7 @@ import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 
@@ -34,7 +35,7 @@ class ImageViewModel(application: Application) : AndroidViewModel(application) {
         try {
             if (uri != null) {
                 val descriptor =
-                    context.contentResolver.openFileDescriptor(uri, "W")
+                    context.contentResolver.openFileDescriptor(uri, "rw")
 
                 if (descriptor != null) {
                     val fileOutputStream = FileOutputStream(descriptor.fileDescriptor)

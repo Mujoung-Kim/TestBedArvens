@@ -1,11 +1,10 @@
 package com.todaysquare.retrofitfunctiontestbed.ui.images
 
+import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,8 +20,9 @@ import com.todaysquare.retrofitfunctiontestbed.utils.Constants.Param.Companion.F
 import com.todaysquare.retrofitfunctiontestbed.utils.Constants.Param.Companion.FLAG_REQ_CAMERA
 import com.todaysquare.retrofitfunctiontestbed.utils.Constants.Param.Companion.FLAG_REQ_STORAGE
 import com.todaysquare.retrofitfunctiontestbed.utils.Constants.Param.Companion.STORAGE_PERMISSION
+
 import kotlinx.android.synthetic.main.activity_image.*
-import org.jetbrains.anko.startActivityForResult
+
 import org.jetbrains.anko.toast
 
 class ImageActivity : AppCompatActivity() {
@@ -44,7 +44,7 @@ class ImageActivity : AppCompatActivity() {
             when (requestCode) {
                 FLAG_REQ_CAMERA -> {
                     if (data?.extras?.get("data") != null) {
-                        val bitmap = data?.extras?.get("data") as Bitmap
+                        val bitmap = data.extras?.get("data") as Bitmap
                         val uri = viewModel.saveImageFile(viewModel.newFileName(),
                             "image/jpg", bitmap)
 
@@ -79,7 +79,7 @@ class ImageActivity : AppCompatActivity() {
             FLAG_PERM_CAMERA -> {
                 for (grant in grantResults)
                     if (grant != PackageManager.PERMISSION_GRANTED) {
-                        toast("")
+                        toast("You need to approve camera permissions, but you can use the camera.")
 
                         return
 
@@ -90,11 +90,19 @@ class ImageActivity : AppCompatActivity() {
         }
     }
 
-    fun setView() {
+    private fun setView() {
+        buttonCamera.setOnClickListener {
+            openCamera()
 
+        }
+
+        buttonGallery.setOnClickListener {
+            openGallery()
+
+        }
     }
 
-    fun openCamera() {
+    private fun openCamera() {
         if (checkPermission(CAMERA_PERMISSION, FLAG_REQ_CAMERA)) {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
@@ -103,7 +111,7 @@ class ImageActivity : AppCompatActivity() {
         }
     }
 
-    fun openGallery() {
+    private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
 
         intent.type = MediaStore.Images.Media.CONTENT_TYPE
@@ -111,11 +119,12 @@ class ImageActivity : AppCompatActivity() {
 
     }
 
-    fun checkPermission(permissions: Array<out String>, flag: Int): Boolean {
+    @SuppressLint("ObsoleteSdkInt")
+    private fun checkPermission(permissions: Array<out String>, flag: Int): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             for (permission in permissions)
                 if (ContextCompat.checkSelfPermission(this, permission) !=
-                        PackageManager.PERMISSION_GRANTED) {
+                    PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this, permissions, flag)
 
                     return false

@@ -57,7 +57,7 @@ class SeoulRestApi {
         for (lib in libraries.SeoulPublicLibraryInfo.row) {
             val position = LatLng(lib.XCNTS.toDouble(), lib.YDNTS.toDouble())
             val marker = MarkerOptions().position(position).title(lib.LBRRY_NAME)
-            var obj = mMap.addMarker(marker)
+            val obj = mMap.addMarker(marker)
 
             obj.tag = lib.HMPG_URL
             latLngBounds.include(marker.position)
