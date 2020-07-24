@@ -1,11 +1,13 @@
 package com.todaysquare.asynctaskdownload
 
 import android.annotation.SuppressLint
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.util.Log
+import android.widget.Toast
 import com.todaysquare.asynctaskdownload.data.WorkerRunnable
 import com.todaysquare.asynctaskdownload.data.WorkerThread
 import com.todaysquare.asynctaskdownload.utils.Constants.Param.Companion.TEST
@@ -25,13 +27,13 @@ import kotlinx.android.synthetic.main.activity_main.*
         1. 루퍼 : 여러 개의 백그라운드에서 큐에 넣은 메시지를 FIFO 방식으로 핸들러에 전달한다.
         2. 핸들러 : Main thread 에서 사용되며 thread 와 Main thread 와의 통신을 담당한다.
         3. 메시지 : 객체에 미리 정의해둔 코드를 입력하고, 큐에 담아두면 루퍼가 꺼내서 핸들러에 전달한다.
-                -> 루퍼의 큐 값을 전달하기 위해 사용되는 클래스(객체)이다. 18:15
+                -> 루퍼의 큐 값을 전달하기 위해 사용되는 클래스(객체)이다.
 
 */
 class MainActivity : AppCompatActivity() {
     var total = 0
     var operation = false
-    val handler = @SuppressLint("HandlerLeak")
+    private val handler = @SuppressLint("HandlerLeak")
     object : Handler() {
         override fun handleMessage(msg: Message) {
             val minute = String.format("%02d", total/60)

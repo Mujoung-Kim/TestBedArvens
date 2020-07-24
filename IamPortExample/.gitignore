@@ -123,3 +123,4 @@ hs_err_pid*
 
 # top secret file
 secret.xml
+app/libs/
