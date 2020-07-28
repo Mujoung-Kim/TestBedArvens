@@ -3,6 +3,7 @@
     package="com.todaysquare.asynctaskdownload">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -12,9 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.services.ServicesActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".ui.images.ImagesActivity">
+        </activity>
+        <activity android:name=".ui.services.ServicesActivity">
+        </activity>
+        <activity android:name=".ui.foreground.ForegroundsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +29,8 @@
         <service
             android:name=".data.MyService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>

@@ -12,6 +12,9 @@ object Constants {
             //  TAG
             const val TEST = "Test"
 
+            //  Foreground
+            const val CHANNEL_ID = "ForegroundChannel"
+
         }
     }
 }
