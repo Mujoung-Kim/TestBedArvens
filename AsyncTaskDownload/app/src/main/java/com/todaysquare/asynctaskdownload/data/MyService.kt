@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
+import android.view.View
 import com.todaysquare.asynctaskdownload.utils.Constants.Param.Companion.TEST
 
 class MyService : Service() {
@@ -29,8 +30,17 @@ class MyService : Service() {
 
     }
 
+    override fun onDestroy() {
+        Log.d(javaClass.simpleName + TEST, "Service terminated.")
+        super.onDestroy()
+
+    }
+
     inner class MyBinder : Binder() {
         fun getService(): MyService = this@MyService
 
     }
+
+    fun serviceMessage(): String = "Hello Activity! I am service."
+
 }

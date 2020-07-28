@@ -7,51 +7,95 @@
     tools:context=".ui.services.ServicesActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/serviceGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85"/>
+        app:layout_constraintGuide_percent="0.15"/>
 
     <Button
         android:id="@+id/buttonServiceStart"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Service start"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textAllCaps="false"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:onClick="serviceStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonServiceStop"
+        android:text="Service start"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/serviceGuideline"
+        app:layout_constraintBottom_toTopOf="@id/buttonBind"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+        app:layout_constraintEnd_toStartOf="@id/buttonServiceStop" />
 
     <Button
         android:id="@+id/buttonServiceStop"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Service Stop"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textAllCaps="false"
         android:onClick="serviceStop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+        android:text="Service Stop"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/serviceGuideline"
+        app:layout_constraintBottom_toTopOf="@id/buttonUnbind"
+        app:layout_constraintStart_toEndOf="@id/buttonServiceStart"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/serviceGuideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75"/>
 
     <Button
         android:id="@+id/buttonBind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="serviceBind"
         android:text="Service bind"
-        android:textSize="24sp"
         android:textAllCaps="false"
-        android:onClick="serviceBind"/>
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/buttonServiceStart"
+        app:layout_constraintBottom_toTopOf="@id/serviceGuideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonUnbind"/>
+
+    <Button
+        android:id="@+id/buttonUnbind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="serviceUnbind"
+        android:text="Service unbind"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/serviceGuideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buttonBind"
+        app:layout_constraintTop_toBottomOf="@id/buttonServiceStop" />
+
+    <Button
+        android:id="@+id/buttonFunction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Service function call"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:onClick="callServiceFunction"
+        app:layout_constraintTop_toBottomOf="@id/serviceGuideline2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

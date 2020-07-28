@@ -13,6 +13,7 @@ import android.view.View
 import com.todaysquare.asynctaskdownload.R
 import com.todaysquare.asynctaskdownload.data.MyService
 import com.todaysquare.asynctaskdownload.utils.Constants.Param.Companion.TEST
+import org.jetbrains.anko.toast
 
 class ServicesActivity : AppCompatActivity() {
     //  Bounded Service 부분
@@ -30,12 +31,15 @@ class ServicesActivity : AppCompatActivity() {
             myService = binder.getService()
             isService = true
 
+            Log.d(javaClass.simpleName + TEST, "Connected.")
+
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_services)
+
     }
 
     fun serviceStart(view: View) {
@@ -69,9 +73,14 @@ class ServicesActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        Log.d(javaClass.simpleName + TEST, "Service terminated.")
-        super.onDestroy()
+    fun callServiceFunction(view: View) {
+        if (isService) {
+            val message = myService?.serviceMessage()
+
+            toast("message = $message")
+
+        }
+        else toast("Service not connected.")
 
     }
 }
