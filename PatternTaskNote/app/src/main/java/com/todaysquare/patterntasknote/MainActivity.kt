@@ -1,15 +1,21 @@
 package com.todaysquare.patterntasknote
 
 import android.app.AlertDialog
-import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.todaysquare.patterntasknote.data.adapters.ContactAdapter
 import com.todaysquare.patterntasknote.data.databases.entities.Contact
 import com.todaysquare.patterntasknote.ui.ContactViewModel
+import com.todaysquare.patterntasknote.ui.add.AddActivity
+import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.EXTRA_CONTACT_ID
+import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.EXTRA_CONTACT_NAME
+import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.EXTRA_CONTACT_NUMBER
+
 import kotlinx.android.synthetic.main.activity_main.*
 
 /*
@@ -32,6 +38,12 @@ class MainActivity : AppCompatActivity() {
         //  Set contactItemClick & contactItemLongClick lambda
         val adapter = ContactAdapter({ contact ->
             //  put extra of contact info & start AddActivity
+            val intent = Intent(this, AddActivity::class.java)
+
+            intent.putExtra(EXTRA_CONTACT_NAME, contact.name)
+            intent.putExtra(EXTRA_CONTACT_NUMBER, contact.number)
+            intent.putExtra(EXTRA_CONTACT_ID, contact.id)
+            startActivity(intent)
 
         }, { contact -> deleteDialog(contact) })
         val linearLayoutManager = LinearLayoutManager(this)
@@ -44,6 +56,12 @@ class MainActivity : AppCompatActivity() {
             adapter.setContacts(contacts)
         })
 
+        main_button.setOnClickListener {
+            val intent = Intent(this, AddActivity::class.java)
+
+            startActivity(intent)
+
+        }
     }
 
     private fun deleteDialog(contact: Contact) {
