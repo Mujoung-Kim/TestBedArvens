@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 
 import com.todaysquare.patterntasknote.R
 import com.todaysquare.patterntasknote.data.databases.entities.Contact
-import com.todaysquare.patterntasknote.ui.ContactViewModel
+import com.todaysquare.patterntasknote.ui.contact.ContactViewModel
 import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.EXTRA_CONTACT_ID
 import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.EXTRA_CONTACT_NAME
 import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.EXTRA_CONTACT_NUMBER

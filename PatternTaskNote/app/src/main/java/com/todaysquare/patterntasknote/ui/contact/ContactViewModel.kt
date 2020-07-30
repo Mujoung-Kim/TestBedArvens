@@ -1,4 +1,4 @@
-package com.todaysquare.patterntasknote.ui
+package com.todaysquare.patterntasknote.ui.contact
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
