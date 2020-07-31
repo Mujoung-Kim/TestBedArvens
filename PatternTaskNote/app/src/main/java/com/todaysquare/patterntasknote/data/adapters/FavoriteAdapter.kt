@@ -6,25 +6,24 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 
 import com.todaysquare.patterntasknote.R
-import com.todaysquare.patterntasknote.data.databases.entities.BachelorNotice
-import com.todaysquare.patterntasknote.databinding.ItemBachelorBinding
+import com.todaysquare.patterntasknote.data.databases.entities.FavoriteNotice
+import com.todaysquare.patterntasknote.databinding.ItemFavoriteBinding
 
-class BachelorAdapter(private val itemClick: (BachelorNotice) -> Unit,
-    private val numClick: (BachelorNotice) -> Unit) : RecyclerView.Adapter<BachelorAdapter.ViewHolder>() {
+class FavoriteAdapter(private val itemClick: (FavoriteNotice) -> Unit,
+    private val numClick: (FavoriteNotice) -> Unit) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
-    private val items = ArrayList<BachelorNotice>()
+    private val items = ArrayList<FavoriteNotice>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = DataBindingUtil
-            .inflate<ItemBachelorBinding>(LayoutInflater.from(parent.context),
-                R.layout.item_bachelor, parent, false)
+        val binding = DataBindingUtil.inflate<ItemFavoriteBinding>(
+            LayoutInflater.from(parent.context), R.layout.item_favorite, parent, false)
         val viewHolder = ViewHolder(binding)
 
         binding.root.setOnClickListener {
             itemClick(items[viewHolder.adapterPosition])
 
         }
-        binding.bachelorTvNum.setOnClickListener {
+        binding.favoriteTvNum.setOnClickListener {
             numClick(items[viewHolder.adapterPosition])
 
         }
@@ -42,17 +41,17 @@ class BachelorAdapter(private val itemClick: (BachelorNotice) -> Unit,
         }
     }
 
-    inner class ViewHolder(private val binding: ItemBachelorBinding)
+    inner class ViewHolder(private val binding: ItemFavoriteBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: BachelorNotice) {
+        fun bind(item: FavoriteNotice) {
             binding.item = item
             binding.executePendingBindings()
 
         }
     }
 
-    fun addItems(items: List<BachelorNotice>) {
+    fun addItem(items: List<FavoriteNotice>) {
         this.items.addAll(items)
         notifyDataSetChanged()
 

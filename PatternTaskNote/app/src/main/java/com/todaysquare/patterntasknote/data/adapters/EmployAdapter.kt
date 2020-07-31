@@ -6,31 +6,29 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 
 import com.todaysquare.patterntasknote.R
-import com.todaysquare.patterntasknote.data.databases.entities.BachelorNotice
-import com.todaysquare.patterntasknote.databinding.ItemBachelorBinding
+import com.todaysquare.patterntasknote.data.databases.entities.EmployNotice
+import com.todaysquare.patterntasknote.databinding.ItemEmployBinding
 
-class BachelorAdapter(private val itemClick: (BachelorNotice) -> Unit,
-    private val numClick: (BachelorNotice) -> Unit) : RecyclerView.Adapter<BachelorAdapter.ViewHolder>() {
+class EmployAdapter(private val itemClick: (EmployNotice) -> Unit,
+    private val numClick: (EmployNotice) -> Unit) : RecyclerView.Adapter<EmployAdapter.ViewHolder>() {
 
-    private val items = ArrayList<BachelorNotice>()
+    private val items = ArrayList<EmployNotice>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = DataBindingUtil
-            .inflate<ItemBachelorBinding>(LayoutInflater.from(parent.context),
-                R.layout.item_bachelor, parent, false)
+        val binding = DataBindingUtil.inflate<ItemEmployBinding>(
+            LayoutInflater.from(parent.context), R.layout.item_employ, parent, false)
         val viewHolder = ViewHolder(binding)
 
         binding.root.setOnClickListener {
             itemClick(items[viewHolder.adapterPosition])
 
         }
-        binding.bachelorTvNum.setOnClickListener {
+        binding.employTvNum.setOnClickListener {
             numClick(items[viewHolder.adapterPosition])
 
         }
 
         return viewHolder
-
     }
 
     override fun getItemCount(): Int = items.size
@@ -42,17 +40,17 @@ class BachelorAdapter(private val itemClick: (BachelorNotice) -> Unit,
         }
     }
 
-    inner class ViewHolder(private val binding: ItemBachelorBinding)
+    inner class ViewHolder(private val binding: ItemEmployBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: BachelorNotice) {
+        fun bind(item: EmployNotice) {
             binding.item = item
             binding.executePendingBindings()
 
         }
     }
 
-    fun addItems(items: List<BachelorNotice>) {
+    fun addItems(items: List<EmployNotice>) {
         this.items.addAll(items)
         notifyDataSetChanged()
 

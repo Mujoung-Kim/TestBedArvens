@@ -1,4 +1,4 @@
-package com.todaysquare.patterntasknote.data.repositories.remote
+package com.todaysquare.patterntasknote.data.repositories.remote.bachelor
 
 import com.todaysquare.patterntasknote.data.databases.entities.BachelorNotice
 import io.reactivex.Single

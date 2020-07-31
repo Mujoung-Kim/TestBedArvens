@@ -1,26 +1,27 @@
-package com.todaysquare.patterntasknote.ui.bachelor
+package com.todaysquare.patterntasknote.ui.favorite
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 
 import com.todaysquare.patterntasknote.R
-import com.todaysquare.patterntasknote.data.adapters.BachelorAdapter
+import com.todaysquare.patterntasknote.data.adapters.FavoriteAdapter
 import com.todaysquare.patterntasknote.data.databases.entities.FavoriteNotice
 import com.todaysquare.patterntasknote.data.network.NetworkManager
-import com.todaysquare.patterntasknote.databinding.FragmentBachelorBinding
+import com.todaysquare.patterntasknote.databinding.FragmentFavoriteBinding
 import com.todaysquare.patterntasknote.ui.base.BaseFragment
 import com.todaysquare.patterntasknote.ui.dialog.DialogAddFragment
 import com.todaysquare.patterntasknote.ui.notice_webview.NoticeWebViewActivity
+import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.EXTRA_NOTICE_DELETE
 import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.EXTRA_NOTICE_LINK
 import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.EXTRA_NOTICE_SAVE
 import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.TAG_DIALOG_EVENT
 
-class BachelorNoticeFragment :
-    BaseFragment<FragmentBachelorBinding, BachelorNoticeViewModel>(R.layout.fragment_bachelor) {
+class FavoriteFragment : BaseFragment<FragmentFavoriteBinding,
+            FavoriteViewModel>(R.layout.fragment_favorite) {
 
-    private lateinit var noticeAdapter: BachelorAdapter
-    override val viewModel: BachelorNoticeViewModel by viewModels()
+    override val viewModel: FavoriteViewModel by viewModels()
+    private lateinit var noticeAdapter: FavoriteAdapter
 
     override fun init() {
         binding.vm = viewModel
@@ -35,7 +36,7 @@ class BachelorNoticeFragment :
     }
 
     private fun initAdapter() {
-        noticeAdapter = BachelorAdapter(itemClick = { item ->
+        noticeAdapter = FavoriteAdapter(itemClick = { item ->
             val intent = Intent(context, NoticeWebViewActivity::class.java)
 
             intent.putExtra(EXTRA_NOTICE_LINK, item.link)
@@ -46,6 +47,7 @@ class BachelorNoticeFragment :
                 val bundle = Bundle()
 
                 bundle.putParcelable(EXTRA_NOTICE_SAVE, FavoriteNotice(it.num, it.title, it.link))
+                bundle.putString(EXTRA_NOTICE_DELETE, EXTRA_NOTICE_DELETE)
 
                 val dialog = DialogAddFragment().getInstance()
 
@@ -55,7 +57,7 @@ class BachelorNoticeFragment :
 
                 }
             })
-        binding.rvBachelors.adapter = noticeAdapter
+        binding.rvBusiness.adapter = noticeAdapter
 
     }
 }

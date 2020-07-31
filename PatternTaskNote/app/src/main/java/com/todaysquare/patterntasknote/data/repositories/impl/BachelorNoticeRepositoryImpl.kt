@@ -2,14 +2,15 @@ package com.todaysquare.patterntasknote.data.repositories.impl
 
 import com.todaysquare.patterntasknote.data.databases.entities.BachelorNotice
 import com.todaysquare.patterntasknote.data.repositories.BachelorNoticeRepository
-import com.todaysquare.patterntasknote.data.repositories.local.BachelorNoticeLocalDataSource
-import com.todaysquare.patterntasknote.data.repositories.remote.BachelorNoticeRemoteDataSource
+import com.todaysquare.patterntasknote.data.repositories.local.bachelor.BachelorNoticeLocalDataSource
+import com.todaysquare.patterntasknote.data.repositories.remote.bachelor.BachelorNoticeRemoteDataSource
 
 import io.reactivex.Flowable
 import io.reactivex.Single
 
 class BachelorNoticeRepositoryImpl(private val bachelorNoticeRemoteDataSource: BachelorNoticeRemoteDataSource,
-    private val bachelorNoticeLocalDataSource: BachelorNoticeLocalDataSource) : BachelorNoticeRepository {
+                                   private val bachelorNoticeLocalDataSource: BachelorNoticeLocalDataSource
+) : BachelorNoticeRepository {
 
     override fun requestNotice(): Flowable<List<BachelorNotice>> =
         bachelorNoticeLocalDataSource.getNotice()

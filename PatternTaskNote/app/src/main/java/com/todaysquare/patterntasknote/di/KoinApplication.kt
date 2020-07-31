@@ -3,6 +3,7 @@ package com.todaysquare.patterntasknote.di
 import android.app.Application
 
 import com.todaysquare.patterntasknote.BuildConfig
+import com.todaysquare.patterntasknote.di.modules.*
 
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -20,7 +21,7 @@ class KoinApplication : Application() {
                 androidLogger(Level.DEBUG)
 
             androidContext(this@KoinApplication)
-            modules()
+            modules(repositoryModule, localDataModule, remoteDataModule, viewModelModule, apiModule)
 
         }
     }

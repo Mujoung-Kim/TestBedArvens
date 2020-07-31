@@ -6,25 +6,24 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 
 import com.todaysquare.patterntasknote.R
-import com.todaysquare.patterntasknote.data.databases.entities.BachelorNotice
-import com.todaysquare.patterntasknote.databinding.ItemBachelorBinding
+import com.todaysquare.patterntasknote.data.databases.entities.GeneralNotice
+import com.todaysquare.patterntasknote.databinding.ItemGeneralBinding
 
-class BachelorAdapter(private val itemClick: (BachelorNotice) -> Unit,
-    private val numClick: (BachelorNotice) -> Unit) : RecyclerView.Adapter<BachelorAdapter.ViewHolder>() {
+class GeneralAdapter(private val itemClick: (GeneralNotice) -> Unit,
+    private val numClick: (GeneralNotice) -> Unit) : RecyclerView.Adapter<GeneralAdapter.ViewHolder>() {
 
-    private val items = ArrayList<BachelorNotice>()
+    private val items = ArrayList<GeneralNotice>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = DataBindingUtil
-            .inflate<ItemBachelorBinding>(LayoutInflater.from(parent.context),
-                R.layout.item_bachelor, parent, false)
+        val binding = DataBindingUtil.inflate<ItemGeneralBinding>(
+            LayoutInflater.from(parent.context), R.layout.item_general, parent, false)
         val viewHolder = ViewHolder(binding)
 
         binding.root.setOnClickListener {
             itemClick(items[viewHolder.adapterPosition])
 
         }
-        binding.bachelorTvNum.setOnClickListener {
+        binding.generalTvNum.setOnClickListener {
             numClick(items[viewHolder.adapterPosition])
 
         }
@@ -42,17 +41,17 @@ class BachelorAdapter(private val itemClick: (BachelorNotice) -> Unit,
         }
     }
 
-    inner class ViewHolder(private val binding: ItemBachelorBinding)
+    inner class ViewHolder(private val binding: ItemGeneralBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: BachelorNotice) {
+        fun bind(item: GeneralNotice) {
             binding.item = item
             binding.executePendingBindings()
 
         }
     }
 
-    fun addItems(items: List<BachelorNotice>) {
+    fun addItems(items: List<GeneralNotice>) {
         this.items.addAll(items)
         notifyDataSetChanged()
 

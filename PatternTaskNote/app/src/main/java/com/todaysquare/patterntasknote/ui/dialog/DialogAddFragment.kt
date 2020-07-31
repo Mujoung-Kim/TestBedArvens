@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.todaysquare.patterntasknote.R
+import com.todaysquare.patterntasknote.data.databases.entities.FavoriteNotice
+import com.todaysquare.patterntasknote.ui.favorite.FavoriteViewModel
 import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.EXTRA_NOTICE_DELETE
 import com.todaysquare.patterntasknote.utils.Constants.Param.Companion.EXTRA_NOTICE_SAVE
 import kotlinx.android.synthetic.main.fragment_dialog_add.view.*
@@ -32,7 +34,7 @@ class DialogAddFragment : DialogFragment(), View.OnClickListener {
 
     private fun processBundle(view: View) {
         val bundle = arguments
-        val notice = bundle?.getParcelable<>(EXTRA_NOTICE_SAVE)
+        val notice = bundle?.getParcelable<FavoriteNotice>(EXTRA_NOTICE_SAVE)
 
         when (bundle?.getString(EXTRA_NOTICE_DELETE, "")) {
             EXTRA_NOTICE_DELETE -> {

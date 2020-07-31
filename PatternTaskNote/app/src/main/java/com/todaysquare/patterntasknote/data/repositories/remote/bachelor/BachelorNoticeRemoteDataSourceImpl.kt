@@ -1,4 +1,4 @@
-package com.todaysquare.patterntasknote.data.repositories.remote
+package com.todaysquare.patterntasknote.data.repositories.remote.bachelor
 
 import com.todaysquare.patterntasknote.data.databases.entities.BachelorNotice
 import com.todaysquare.patterntasknote.utils.Constants.Url.Companion.BASE_URL
@@ -9,7 +9,8 @@ import io.reactivex.Single
 
 import org.jsoup.Jsoup
 
-class BachelorNoticeRemoteDataSourceImpl : BachelorNoticeRemoteDataSource {
+class BachelorNoticeRemoteDataSourceImpl :
+    BachelorNoticeRemoteDataSource {
 
     override fun requestNotice(): Single<List<BachelorNotice>> =
         Single.fromObservable {
@@ -22,7 +23,7 @@ class BachelorNoticeRemoteDataSourceImpl : BachelorNoticeRemoteDataSource {
 
                 for ((i, element) in contentElements.withIndex())
                     bachelorNoticeList.add(BachelorNotice(idElements[i].text(), element.text(),
-                            BASE_URL + element.attr("href")))
+                            IMITATION_URL + element.attr("href")))
 
                 it.onNext(bachelorNoticeList)
                 it.onComplete()
@@ -44,7 +45,7 @@ class BachelorNoticeRemoteDataSourceImpl : BachelorNoticeRemoteDataSource {
                 for ((i, element) in contentElements.withIndex())
                     if (idElements[i].text() != "공지")
                         bachelorNoticeList.add(BachelorNotice(idElements[i].text(), element.text(),
-                        BASE_URL + element.attr("href")))
+                        IMITATION_URL + element.attr("href")))
 
                 it.onNext(bachelorNoticeList)
                 it.onComplete()
