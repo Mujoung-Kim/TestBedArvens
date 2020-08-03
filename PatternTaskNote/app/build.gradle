@@ -54,8 +54,18 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    //  Firebase
+    implementation 'com.google.firebase:firebase-core:17.4.3'
+    implementation 'com.google.firebase:firebase-firestore:21.4.3'
+    implementation 'com.google.firebase:firebase-auth:19.3.1'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-messaging:20.2.0'
+
     //  For BottomNavigationView from Material Components
     implementation 'com.google.android.material:material:1.1.0'
+
+    //  Google service
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
 
     //  Jsoup
     implementation 'org.jsoup:jsoup:1.11.3'
@@ -89,8 +99,11 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.8.1"
 
     //  Room
-    implementation "android.arch.persistence.room:runtime:1.1.1"
-    kapt "android.arch.persistence.room:compiler:1.1.1"
+    implementation "android.arch.persistence.room:runtime:2.1.1"
+    implementation "androidx.room:room-rxjava2:2.2.5"
+    implementation 'androidx.room:room-ktx:2.2.5'
+    kapt "android.arch.persistence.room:compiler:2.1.1"
+    testImplementation "androidx.room:room-testing:2.2.5"
 
     //  Rxjava
     implementation "io.reactivex.rxjava2:rxjava:2.2.17"

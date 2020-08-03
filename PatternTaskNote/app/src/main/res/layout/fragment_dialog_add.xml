@@ -55,5 +55,6 @@
             android:padding="8dp"
             android:text="@string/no_text"
             android:textColor="@color/colorBlack" />
+
     </LinearLayout>
 </LinearLayout>
