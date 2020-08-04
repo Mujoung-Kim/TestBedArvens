@@ -131,5 +131,4 @@ Constants
 .idea/runConfigurations.xml
 .idea/vcs.xml
 app/libs/
-app/src/main/java/com/todaysquare/coronatestapplication/data/
-app/src/main/java/com/todaysquare/coronatestapplication/di/modules/
+app/src/main/java/com/todaysquare/coronatestapplication/utils/Constants.kt
