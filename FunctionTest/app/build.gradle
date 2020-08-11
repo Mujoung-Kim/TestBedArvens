@@ -8,8 +8,9 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
-    viewBinding {
-        enabled = true
+    //  Android studio 4.0 이후 아래의 방식으로 변경됨.
+    buildFeatures {
+        viewBinding = true
 
     }
 
@@ -38,11 +39,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
-
-kapt {
-    generateStubs = true
-
 }
 
 dependencies {
